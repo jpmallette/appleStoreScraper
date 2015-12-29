@@ -5,9 +5,8 @@
 ##########################################################
 
 ################ TOP APP DATA ####################################
-## Merge top_app_data 
+## Merge top_app_data change the directory of files
 top_app_data <- merge_csv("C:\\Users\\Terry\\Desktop\\Project\\Applestore\\data\\")
-top_app_data <- subset(top_app_data,category != "Top+Apps" )
 
 # Add AppID field
 top_app_data$AppID<-substr(top_app_data$topapp_url_product,regexpr('www.topappcharts.com'
@@ -38,7 +37,8 @@ for (i in 1:nrow(apple_app_url)) {
 apple_app_url <- apple_app_url[!duplicated(apple_app_url$AppID), ]
 
 # read apple data
-# depending on your wi-fi connection. I recommend not more than 100 url at a time and 30 seconds wait between each batch
+# depending on your wi-fi connection.
+# I recommend not more than 100 url at a time and 30 seconds wait between each batch
 sequence <- seq(from = 1,to = length(apple_app_url),950)
 sequence <- c(sequence,nrow(apple_app_url))
 
@@ -99,11 +99,11 @@ dt_price_499_099<-dt_price[!is.na(dt_price$ranking_change_499_099),]
 
 # boxplot category global 
 par(mfrow=c(2,2))
-hist(dt_price_199_099$ranking_change_199_099,main="",ylab = "Nb changement de rangs",xlab ="Différence de rangs lorsque le prix change de 0.99$ à 1.99$")
-hist(dt_price_299_099$ranking_change_299_099,main="",ylab = "Nb changement de rangs",xlab ="Différence de rangs lorsque le prix change de 0.99$ à 2.99$")
-hist(dt_price_399_099$ranking_change_399_099,main="",ylab = "Nb changement de rangs",xlab ="Différence de rangs lorsque le prix change de 0.99$ à 3.99$",
+hist(dt_price_199_099$ranking_change_199_099,main="",ylab = "Nb changement de rangs",xlab ="Diff?rence de rangs lorsque le prix change de 0.99$ ? 1.99$")
+hist(dt_price_299_099$ranking_change_299_099,main="",ylab = "Nb changement de rangs",xlab ="Diff?rence de rangs lorsque le prix change de 0.99$ ? 2.99$")
+hist(dt_price_399_099$ranking_change_399_099,main="",ylab = "Nb changement de rangs",xlab ="Diff?rence de rangs lorsque le prix change de 0.99$ ? 3.99$",
 xlim = c(-100,100))
-hist(dt_price_499_099$ranking_change_499_099,main="",ylab = "Nb changement de rangs",xlab ="Différence de rangs lorsque le prix change de 0.99$ à 4.99$",
+hist(dt_price_499_099$ranking_change_499_099,main="",ylab = "Nb changement de rangs",xlab ="Diff?rence de rangs lorsque le prix change de 0.99$ ? 4.99$",
      xlim = c(-150,150))
 
 #### Section with ranking_change_099_199 
@@ -114,18 +114,16 @@ category <- sqldf("select category, count(ranking_change_199_099) from dt_price_
 top5_category <- category[1:5,1]
 dt_category <- subset(dt_price_199_099,category %in% top5_category)
 
-
-
-# plot boxplot 0.99 à 1.99$
+# plot boxplot 0.99 to 1.99$
   
 p <- ggplot(dt_category, aes(factor(category), ranking_change_199_099, fill=factor(category)))
 p1 <- p + geom_boxplot()
 p2 <- p1 + geom_point(position = position_jitter(width = 0.1)) + theme(text = element_text(size=18))
-p3 <- p2 + labs(x = "Catégories",y = "Difference de rang")
+p3 <- p2 + labs(x = "Cat?gories",y = "Difference de rang")
 p4 <- p3 + coord_cartesian(ylim = c(-100, 100))   # this delete the extreme value display
 p4
 
-  #### Section with ranking_change_099_299 
+#### Section with ranking_change_099_299 
 # remove na value 
 dt_price_299_099<-dt_price[!is.na(dt_price$ranking_change_299_099),]
 
@@ -136,15 +134,11 @@ top5_category <- category[1:5,1]
 dt_category <- subset(dt_price_299_099,category %in% top5_category)
 
 
-# plot boxplot 0.99 à 2.99$
+# plot boxplot 0.99 to 2.99$
 p <- ggplot(dt_category, aes(factor(category), ranking_change_299_099, fill=factor(category)))
 p1 <- p + geom_boxplot()
 p2 <- p1 + geom_point(position = position_jitter(width = 0.1)) + theme(text = element_text(size=18))
 p2 + labs(x = "Categories",y = "Difference de rang")
-
-# NOTE : il serait intéressant d'ajouter deux plots global sans catégorie ( la première
-# serait la boxplot de 0.99 à 2.99 et la deuxième de 0.99 à 1.99)  
-
 
 #### End section : How does the variation of paid app price affect ranking ?
 ################################################################################
@@ -195,157 +189,28 @@ df_competition_21_30_Free_iPhone <- top5CategoryCompetitionData(data_intensity,p
 
 par(mfrow=c(2,3))
 boxplot(days_since_launch ~ category,data = df_monopoly_1_10_Free_iPhone, 
-        main="Rangs 1 à 10",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
+        main="Rangs 1 ? 10",ylim = c(0, 2500),
+        xlab="Cat?gories", ylab="Jours depuis la publication")
 
 boxplot(days_since_launch ~ category,data = df_monopoly_11_20_Free_iPhone, 
-        main="Rangs 11 à 20",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
+        main="Rangs 11 ? 20",ylim = c(0, 2500),
+        xlab="Cat?gories", ylab="Jours depuis la publication")
 
 boxplot(days_since_launch ~ category,data = df_monopoly_21_30_Free_iPhone, 
-        main="Rangs 21 à 30",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
+        main="Rangs 21 ? 30",ylim = c(0, 2500),
+        xlab="Cat?gories", ylab="Jours depuis la publication")
 
 boxplot(days_since_launch ~ category,data = df_competition_1_10_Free_iPhone, 
-        main="Rangs 1 à 10",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
+        main="Rangs 1 ? 10",ylim = c(0, 2500),
+        xlab="Cat?gories", ylab="Jours depuis la publication")
 
 boxplot(days_since_launch ~ category,data = df_competition_11_20_Free_iPhone, 
-        main="Rangs 11 à 20",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
+        main="Rangs 11 ? 20",ylim = c(0, 2500),
+        xlab="Cat?gories", ylab="Jours depuis la publication")
 
 boxplot(days_since_launch ~ category,data = df_competition_21_30_Free_iPhone, 
-        main="Rangs 21 à 30",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-
-### iPhone Paid 
-
-
-df_monopoly_1_10_Paid_iPhone <- top5CategoryMonopolyData(data_intensity,pricing_model = "Paid",
-                                                         device ="iPhone" ,cat_ranking = "1-10")
-df_monopoly_11_20_Paid_iPhone <- top5CategoryMonopolyData(data_intensity,pricing_model = "Paid",
-                                                          device ="iPhone" ,cat_ranking = "11-20")
-df_monopoly_21_30_Paid_iPhone <- top5CategoryMonopolyData(data_intensity,pricing_model = "Paid",
-                                                          device ="iPhone" ,cat_ranking = "21-30")
-
-df_competition_1_10_Paid_iPhone <- top5CategoryCompetitionData(data_intensity,pricing_model = "Paid",
-                                                               device ="iPhone" ,cat_ranking = "1-10")
-df_competition_11_20_Paid_iPhone <- top5CategoryCompetitionData(data_intensity,pricing_model = "Paid",
-                                                                device ="iPhone" ,cat_ranking = "11-20")
-df_competition_21_30_Paid_iPhone <- top5CategoryCompetitionData(data_intensity,pricing_model = "Paid",
-                                                                device ="iPhone" ,cat_ranking = "21-30")
-
-par(mfrow=c(2,3))
-boxplot(days_since_launch ~ category,data = df_monopoly_1_10_Paid_iPhone, 
-        main="Rangs 1 à 10",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_monopoly_11_20_Paid_iPhone, 
-        main="Rangs 11 à 20",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_monopoly_21_30_Paid_iPhone, 
-        main="Rangs 21 à 30",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_competition_1_10_Paid_iPhone, 
-        main="Rangs 1 à 10",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_competition_11_20_Paid_iPhone, 
-        main="Rangs 11 à 20",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_competition_21_30_Paid_iPhone, 
-        main="Rangs 21 à 30",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-#### iPhone Free  # Bottom 171 - 200 ranking
-
-# I query average days since launch by category to identify the top / bottom
-# category to plot 
-
-df_monopoly_171_180_Free_iPhone <- top5CategoryMonopolyData(data_intensity,pricing_model = "Free",
-                                                         device ="iPhone" ,cat_ranking = "171-180")
-df_monopoly_181_190_Free_iPhone <- top5CategoryMonopolyData(data_intensity,pricing_model = "Free",
-                                                          device ="iPhone" ,cat_ranking = "181-190")
-df_monopoly_191_200_Free_iPhone <- top5CategoryMonopolyData(data_intensity,pricing_model = "Free",
-                                                          device ="iPhone" ,cat_ranking = "191-200")
-
-df_competition_171_180_Free_iPhone <- top5CategoryCompetitionData(data_intensity,pricing_model = "Free",
-                                                               device ="iPhone" ,cat_ranking = "171-180")
-df_competition_181_190_Free_iPhone <- top5CategoryCompetitionData(data_intensity,pricing_model = "Free",
-                                                                device ="iPhone" ,cat_ranking = "181-190")
-df_competition_191_200_Free_iPhone <- top5CategoryCompetitionData(data_intensity,pricing_model = "Free",
-                                                                device ="iPhone" ,cat_ranking = "191-200")
-
-par(mfrow=c(2,3))
-boxplot(days_since_launch ~ category,data = df_monopoly_171_180_Free_iPhone, 
-        main="Rangs 171 à 180",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_monopoly_181_190_Free_iPhone, 
-        main="Rangs 181 à 190",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_monopoly_191_200_Free_iPhone, 
-        main="Rangs 191 à 200",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_competition_171_180_Free_iPhone, 
-        main="Rangs 171 à 180",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_competition_181_190_Free_iPhone, 
-        main="Rangs 181 à 190",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_competition_191_200_Free_iPhone, 
-        main="Rangs 191 à 200",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-
-### iPhone Paid 
-
-df_monopoly_171_180_Paid_iPhone <- top5CategoryMonopolyData(data_intensity,pricing_model = "Paid",
-                                                         device ="iPhone" ,cat_ranking = "171-180")
-df_monopoly_181_190_Paid_iPhone <- top5CategoryMonopolyData(data_intensity,pricing_model = "Paid",
-                                                          device ="iPhone" ,cat_ranking = "181-190")
-df_monopoly_191_200_Paid_iPhone <- top5CategoryMonopolyData(data_intensity,pricing_model = "Paid",
-                                                          device ="iPhone" ,cat_ranking = "191-200")
-
-df_competition_171_180_Paid_iPhone <- top5CategoryCompetitionData(data_intensity,pricing_model = "Paid",
-                                                               device ="iPhone" ,cat_ranking = "171-180")
-df_competition_181_190_Paid_iPhone <- top5CategoryCompetitionData(data_intensity,pricing_model = "Paid",
-                                                                device ="iPhone" ,cat_ranking = "181-190")
-df_competition_191_200_Paid_iPhone <- top5CategoryCompetitionData(data_intensity,pricing_model = "Paid",
-                                                                device ="iPhone" ,cat_ranking = "191-200")
-
-par(mfrow=c(2,3))
-boxplot(days_since_launch ~ category,data = df_monopoly_171_180_Paid_iPhone, 
-        main="Rangs 171 à 180",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_monopoly_181_190_Paid_iPhone, 
-        main="Rangs 181 à 190",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_monopoly_191_200_Paid_iPhone, 
-        main="Rangs 191 à 200",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_competition_171_180_Paid_iPhone, 
-        main="Rangs 171 à 180",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_competition_181_190_Paid_iPhone, 
-        main="Rangs 181 à 190",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
-
-boxplot(days_since_launch ~ category,data = df_competition_191_200_Paid_iPhone, 
-        main="Rangs 191 à 200",ylim = c(0, 2500),
-        xlab="Catégories", ylab="Jours depuis la publication")
+        main="Rangs 21 ? 30",ylim = c(0, 2500),
+        xlab="Cat?gories", ylab="Jours depuis la publication")
 
 #### End section : Intensity of competition in order to reach the top  #200
 ################################################################################
@@ -409,17 +274,13 @@ dt_apple_imp_cor <- subset(dt_apple_cor,subset = correlation >= 0.20 | correlati
 # plot geom_points : x : category , y = correlation, fill = variable int
 p <- ggplot(dt_apple_cor , aes(factor(category), correlation))
 p1 <- p +  geom_point(aes(color = factor(int_device_pricemodel)),size=10)
-p2 <- p1 + labs(x="Catégories", y="Corrélation Spearman")
+p2 <- p1 + labs(x="Cat?gories", y="Corr?lation Spearman")
 p3 <- p2 + theme(axis.text=element_text(size=12,colour="black"))
 #p3 +  coord_cartesian(ylim = c(-0.50, 0.50))
 
 
 #### End section :  Is there a correlation between meg and ranking ?
 ################################################################################
-
-
-
-
 
 ##############################################################################
 ##############################################################################
@@ -457,7 +318,7 @@ sqldf("select count(distinct AppID) as nombre_apps, category
        from survival
       group by category")
 
-# reshape data with length to investigate Quality of data
+# reshape data with length to investigate quality of data
 
 survival_quality <- dcast(survival,AppID+days_since_launch+category+device+pricing_model~date
                                   ,value.var="ranking",length)
@@ -470,7 +331,7 @@ survival <- subset(survival,!AppID %in% appid_duplicate)
 survival_reshape <- dcast(survival,AppID+days_since_launch+category+device+pricing_model~date
                           ,value.var="ranking",sum)
 
-# investigate reshape 
+# investigate reshape data
 summary(survival_reshape)
 
 # Manage missing value ##### 
@@ -532,7 +393,7 @@ survival_reshape_tc_10 <- time_censure(data = survival_reshape,censure_quit_rank
                                        last_day_observation = last_day_observation,day_observation = day_observation)
 survival_reshape_tc_10 <- subset(survival_reshape_tc_10,first_ranked_day > 0)
 
-# verification du nombre d'apps par catégorie 
+# verification du nombre d'apps par cat?gorie 
 sqldf("select count(distinct AppID) as nombre_apps, category
         from survival_reshape_tc_10
              group by category")
@@ -556,36 +417,32 @@ hist(survival_reshape_tc_50$censure_50)
 summary(survival_reshape_tc_50$time_50)
 
 par(mfrow=c(2,2))
-hist(survival_reshape_tc_200$time_200,ylab = "Nombre d'applications", xlab = "Temps",main = "Rang 1 à 200")
-hist(survival_reshape_tc_100$time_100,ylab = "Nombre d'applications", xlab = "Temps",main = "Rang 1 à 100")
-hist(survival_reshape_tc_50$time_50,ylab = "Nombre d'applications", xlab = "Temps",main = "Rang 1 à 50")
+hist(survival_reshape_tc_200$time_200,ylab = "Nombre d'applications", xlab = "Temps",main = "Rang 1 ? 200")
+hist(survival_reshape_tc_100$time_100,ylab = "Nombre d'applications", xlab = "Temps",main = "Rang 1 ? 100")
+hist(survival_reshape_tc_50$time_50,ylab = "Nombre d'applications", xlab = "Temps",main = "Rang 1 ? 50")
 
 
 ### Survival Analysis
-## WARNING MAKE SURE CENSURE IS GOOD and survfit is good by looking at the TP
-## And Y axis column
 
-
-
-# Gobal survival function 
+# Gobal survival function
 sortie <- survfit(Surv(time_200,censure_200)~1,data=survival_reshape_tc_200)
-plot_1 <- ggsurv(sortie,xlab = "Nombre de jours classés",
-       ylab= "Probabilité de Survie", main = "Rang 1 à 200") + 
+plot_1 <- ggsurv(sortie,xlab = "Nombre de jours class?s",
+       ylab= "Probabilit? de Survie", main = "Rang 1 ? 200") + 
        theme(text = element_text(size=18), 
              axis.text.x = element_text(size=18,colour="black"),
              axis.text.y = element_text(size=18,colour="black")) 
 
 sortie <- survfit(Surv(time_100,censure_100)~1,data=survival_reshape_tc_100)
-plot_2 <- ggsurv(sortie,xlab = "Nombre de jours classés",
-       ylab= "Probabilité de Survie", main = "Rang 1 à 100")  + 
+plot_2 <- ggsurv(sortie,xlab = "Nombre de jours class?s",
+       ylab= "Probabilit? de Survie", main = "Rang 1 ? 100")  + 
         theme(text = element_text(size=18), 
         axis.text.x = element_text(size=18,colour="black"),
         axis.text.y = element_text(size=18,colour="black")) 
 
 
 sortie <- survfit(Surv(time_50,censure_50)~1,data=survival_reshape_tc_50)
-plot_3 <- ggsurv(sortie,xlab = "Nombre de jours classés",
-       ylab= "Probabilité de Survie", main = "Rang 1 à 50")  + 
+plot_3 <- ggsurv(sortie,xlab = "Nombre de jours class?s",
+       ylab= "Probabilit? de Survie", main = "Rang 1 ? 50")  + 
         theme(text = element_text(size=18), 
         axis.text.x = element_text(size=18,colour="black"),
         axis.text.y = element_text(size=18,colour="black"))
@@ -595,22 +452,22 @@ grid.arrange(plot_1, plot_2,plot_3, ncol=2,nrow = 2)
 
 # Survival function with pricing_model as factor
 sortie <- survfit(Surv(time_200,censure_200)~1 + pricing_model,data=survival_reshape_tc_200)
-plot_1 <- ggsurv(sortie,xlab = "Nombre de jours classés",
-       ylab= "Probabilité de Survie", main = "Rang 1 à 200") + 
+plot_1 <- ggsurv(sortie,xlab = "Nombre de jours class?s",
+       ylab= "Probabilit? de Survie", main = "Rang 1 ? 200") + 
        theme(text = element_text(size=18), 
         axis.text.x = element_text(size=18,colour="black"),
         axis.text.y = element_text(size=18,colour="black")) 
 
 sortie <- survfit(Surv(time_100,censure_100)~1 + pricing_model,data=survival_reshape_tc_100)
-plot_2 <- ggsurv(sortie,xlab = "Nombre de jours classés",
-       ylab= "Probabilité de Survie", main = "Rang 1 à 100") + 
+plot_2 <- ggsurv(sortie,xlab = "Nombre de jours class?s",
+       ylab= "Probabilit? de Survie", main = "Rang 1 ? 100") + 
        theme(text = element_text(size=18), 
         axis.text.x = element_text(size=18,colour="black"),
         axis.text.y = element_text(size=18,colour="black")) 
 
 sortie <- survfit(Surv(time_50,censure_50)~1 + pricing_model,data=survival_reshape_tc_50)
-plot_3 <-ggsurv(sortie,xlab = "NNombre de jours classés",
-       ylab= "Probabilité de Survie", main = "Rang 1 à 50") + 
+plot_3 <-ggsurv(sortie,xlab = "NNombre de jours class?s",
+       ylab= "Probabilit? de Survie", main = "Rang 1 ? 50") + 
        theme(text = element_text(size=18), 
         axis.text.x = element_text(size=18,colour="black"),
         axis.text.y = element_text(size=18,colour="black")) 
@@ -619,22 +476,22 @@ grid.arrange(plot_1, plot_2,plot_3, ncol=2,nrow = 2)
 
 # Survival function with device as factor
 sortie <- survfit(Surv(time_200,censure_200)~1 + device ,data=survival_reshape_tc_200)
-plot_1 <- ggsurv(sortie,xlab = "Nombre de jours classés",
-       ylab= "Probabilité de Survie", main = "Rang 1 à 200") + 
+plot_1 <- ggsurv(sortie,xlab = "Nombre de jours class?s",
+       ylab= "Probabilit? de Survie", main = "Rang 1 ? 200") + 
        theme(text = element_text(size=18), 
         axis.text.x = element_text(size=18,colour="black"),
         axis.text.y = element_text(size=18,colour="black")) 
 
 sortie <- survfit(Surv(time_100,censure_100)~1  + device ,data=survival_reshape_tc_100)
-plot_2 <- ggsurv(sortie,xlab = "Nombre de jours classés",
-       ylab= "Probabilité de Survie", main = "Rang 1 à 100") + 
+plot_2 <- ggsurv(sortie,xlab = "Nombre de jours class?s",
+       ylab= "Probabilit? de Survie", main = "Rang 1 ? 100") + 
         theme(text = element_text(size=18), 
         axis.text.x = element_text(size=18,colour="black"),
         axis.text.y = element_text(size=18,colour="black")) 
 
 sortie <- survfit(Surv(time_50,censure_50)~1  + device ,data=survival_reshape_tc_50)
-plot_3 <-ggsurv(sortie,xlab = "Nombre de jours classés",
-       ylab= "Probabilité de Survie", main = "Rang 1 à 50") + 
+plot_3 <-ggsurv(sortie,xlab = "Nombre de jours class?s",
+       ylab= "Probabilit? de Survie", main = "Rang 1 ? 50") + 
         theme(text = element_text(size=18), 
         axis.text.x = element_text(size=18,colour="black"),
         axis.text.y = element_text(size=18,colour="black")) 
@@ -667,11 +524,6 @@ summary(modele.cox)
 ### interpretation 
 # EX : At every moment in time, the risk that a player 
 # quit the app when using an iPad is 0.80 times an iPhone
-
-
-
-
-
 
 #### End section : Cox Survival Analysis
 ################################################################################
