@@ -1,4 +1,4 @@
-# apple
+# appleStoreScraper
 
 This repository will allow developer in the mobile app space to scrape free information from the itunes.com and the http://www.topappcharts.com/ website. The combination of the two websites will allow anyone interested in mobile apps to extract information regarding the characteristic of an app and is ranking. If the scraper run for multiple days, it will allow to see the evolution of any app ranking in time.
 
