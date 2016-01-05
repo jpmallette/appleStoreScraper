@@ -1,5 +1,7 @@
 # appleStoreScraper
 
+## Goal of the repo
+
 This repository will allow developer, mobile app researcher and anyone interested in getting their hand on mobile app data to scrape free information from the itunes.com and the http://www.topappcharts.com/ website. The combination of the two websites allows to extract information regarding the characteristic of an app and their ranking. If the scraper run for multiple days, it will allow to have data on the evolution of any app ranking thorought time. This repository goal is also to demonstrate how to write web scraper in R from scratch. I encourage those interested in scraping in R to consult Hadley Wickham library rvest.
 
 * A detail Report (written in French in MS Word format) can be found by following the link : http://bit.ly/1kGSokb.
