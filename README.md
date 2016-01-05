@@ -34,7 +34,8 @@ read many url without being block by Apple. If you have massive amount of url to
 
 STEP 4 : MERGE THE TWO FILES
 
+* apple_topapp_base <-merge(top_apps_charts_books_data,apple_data,all.x=T,by="AppID")
 
-As a further note, sample analysis can be found in the file "sampleAnalysis.R"
+As a further note, sample analysis can be found in the file "sampleAnalysis.R". Feel free to improve the file (aka name convention and other issue that can arise)
 
-YOU ARE GOOD TO GO ! 
+YOU ARE GOOD TO GO AND HAVE FUN ! 
