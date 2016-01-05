@@ -2,7 +2,6 @@
 
 ##-------- initialisation library and global variable
 
-
 appleStoreScraper <- function(apple_app_url,wait_time,batch_size) {
 
 require(stringr)
@@ -13,7 +12,6 @@ col_names<-c("apple_store_url","seller_name","version","size",
                    "publish_date")
 colnames(store) <- col_names
 row<-length(apple_app_url)
-
 
 ## --------- Read  product url and extract information on product
 ##           at a time  
@@ -163,6 +161,10 @@ Sys.sleep(wait_time) # make R sleep to allow this system to be extracted
               # without being block by apple.
 
 } # end second loop that change the parameter of the first loop 
+store$AppID <- substr(store$apple_store_url,regexpr('/id',store$apple_store_url)
+                         +3,regexpr('?mt',store$apple_store_url)-2)
+
+# com
 return(store)
 
 } # end function   
