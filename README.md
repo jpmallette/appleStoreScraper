@@ -10,10 +10,12 @@ This repository will allow developer, mobile app researcher and anyone intereste
 ## Fun part: How to extract the data
 
 STEP 1 : SOURCE FILES AND CHANGE DIRECTORY
+
 Before extracting, I strongly recommand to source the main.File. Don't forget to change the directory ! 
 * source("mainFonctions.R")
 
 STEP 2 : SCRAPE THE TOPAPPCHARTS WEBSITE
+
 You can scrape any category found in the http://www.topappcharts.com/ website.
 To give an example, suppose you want to extract the data found in the Books category. Simply execute the following 
 line of code. 
