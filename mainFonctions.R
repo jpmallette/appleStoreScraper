@@ -22,10 +22,6 @@ inc._installDeps <- function(lib) {
 source("C:\\Users\\Terry\\Desktop\\Project\\Applestore\\appleStoreScraper.r")
 source("C:\\Users\\Terry\\Desktop\\Project\\Applestore\\topAppChartsFonction.r")
 
-## Global variables 
-today<-Sys.Date()
-main_url_site<-"www.topappcharts.com"
-
 
 ###################################################################################################
 ########## Functions sections
