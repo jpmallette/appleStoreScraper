@@ -14,6 +14,10 @@
 
 extract_data_category <- function(category) { 
 
+## variables 
+today<-Sys.Date()
+main_url_site<-"www.topappcharts.com"
+
 data_storage <- data.frame(matrix(data=NA,
                                   nrow = 800,ncol=9)) 
 colnames(data_storage)<-c("name","price","topapp_url_product","apple_store_url","device",
