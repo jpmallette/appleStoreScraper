@@ -1,7 +1,7 @@
     # purpose : script to automate scraping of topappchartdownload
 
-source("mainFonction.R")
 #--- initilisation 
+source("mainFonction.R")
 
 #--- Global variables
 today<-Sys.Date()
@@ -29,7 +29,7 @@ role_games<-extract_data_category("Role+Playing+Games")
 #top_games<-extract_data_category("Top+Games") 
 #top_apps<-extract_data_category("Top+Apps") 
 
-#--- Vertical merge
+#--- Code example : Vertical merge and writing csv
 df<-rbind(books,education,action_games,adventure_games,arcade_games,
           educational_games,family_games,puzzle_games,simulation_games,
           strategy_games,trivia_games,racing_games,role_games)
