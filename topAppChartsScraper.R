@@ -3,10 +3,6 @@
 #--- initilisation 
 source("mainFonction.R")
 
-#--- Global variables
-today<-Sys.Date()
-main_url_site<-"www.topappcharts.com"
-
 #--- Category extraction
 # general
 books<-extract_data_category("Books") 
