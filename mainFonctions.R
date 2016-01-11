@@ -5,17 +5,18 @@
 
 libs <- c('reshape2', 'data.table', 'stringr','stringi',
           'sqldf','ggplot2','survival','plyr','gridExtra')
-lapply(libs, function(lib) { 
-  suppressPackageStartupMessages( 
-    library(lib, character.only = TRUE)
-  );
-})
 
 inc._installDeps <- function(lib) {
   lapply(libs, function(lib){
     install.packages(lib);
   })
 }
+
+lapply(libs, function(lib) { 
+  suppressPackageStartupMessages( 
+    library(lib, character.only = TRUE)
+  );
+})
 
 ## source other r files
 
