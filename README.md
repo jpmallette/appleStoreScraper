@@ -33,7 +33,7 @@ Following with the example above, run the folowing line of code to get data from
 * apple_data <- appleStoreScraper(top_apps_charts_books_data$apple_store_url,30,60)
 
 The appleStoreScraper(apple_store_url,wait_time,batch_size) function include wait_time and a batch_size arguments that allow to 
-read many url without being block by Apple. If you have massive amount of url to read (more than 10 000), I recommand looking at my appleStoreScraperFacilitator() function to improve scalability. 
+read many url without being block by Apple. If you have massive amount of url to read (more than 10 000), I recommand looking at my appleStoreScraperFacilitator() function to improve scalability. I also recommand to have Ethernet cables for better connection stability.
 
 STEP 4 : MERGE THE TWO FILES
 
