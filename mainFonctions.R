@@ -1,6 +1,7 @@
 ####### Purpose : Main files where we can find function and library required to run
 #######           the project
 
+setwd("/Users/jpmallette/Downloads/appleStoreScraper-master 2/")
 ## Library section
 
 libs <- c('reshape2', 'data.table', 'stringr','stringi',
