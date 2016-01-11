@@ -18,11 +18,6 @@ lapply(libs, function(lib) {
   );
 })
 
-## source other r files
-
-source("appleStoreScraper.r")
-source("topAppChartsFonction.r")
-
 
 ###################################################################################################
 ########## Functions sections
