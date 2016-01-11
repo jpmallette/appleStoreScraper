@@ -20,6 +20,7 @@ lapply(libs, function(lib) {
 })
 
 source("topAppChartsFonction.R")
+source("appleStoreScraper.R")
 
 ###################################################################################################
 ########## Functions sections
