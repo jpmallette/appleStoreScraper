@@ -1,6 +1,6 @@
     # purpose : script to automate scraping of topappchartdownload
 
-source("C:\\Users\\Terry\\Desktop\\Project\\Applestore\\main.r")
+source("mainFonction.R")
 #--- initilisation 
 
 #--- Global variables
