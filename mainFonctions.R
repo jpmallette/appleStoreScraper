@@ -18,6 +18,7 @@ lapply(libs, function(lib) {
   );
 })
 
+source("topAppChartsFonction.R")
 
 ###################################################################################################
 ########## Functions sections
