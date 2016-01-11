@@ -20,8 +20,8 @@ lapply(libs, function(lib) {
 
 ## source other r files
 
-source("C:\\Users\\Terry\\Desktop\\Project\\Applestore\\appleStoreScraper.r")
-source("C:\\Users\\Terry\\Desktop\\Project\\Applestore\\topAppChartsFonction.r")
+source("appleStoreScraper.r")
+source("topAppChartsFonction.r")
 
 
 ###################################################################################################
