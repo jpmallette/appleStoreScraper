@@ -113,7 +113,7 @@ data_storage$category<-category
 data_storage$date<-today
 data_storage$AppID<-substr(data_storage$topapp_url_product,regexpr('www.topappcharts.com'
                              ,data_storage$topapp_url_product)+21
-                           ,regexpr('app-details',data_storag$topapp_url_product)-2)
+                           ,regexpr('app-details',data_storage$topapp_url_product)-2)
 return(data_storage)
 
 }
