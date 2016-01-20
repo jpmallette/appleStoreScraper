@@ -14,7 +14,7 @@ STEP 1 : SOURCE FILES AND CHANGE DIRECTORY
 Before extracting, I strongly recommand to first change the setwd in mainFonction.R with the path where you have downloaded the repo. Afterward, execute the mainFonction.R files
 
 * setwd("/Users/jpmallette/Downloads/appleStoreScraper-master/")
-* source("mainFonction.R") or execute the mainFonction.R script 
+* source("mainFonctions.R") or execute the mainFonction.R script 
 
 STEP 2 : SCRAPE THE TOPAPPCHARTS WEBSITE with the topAppChartsScraper.R file.
 
