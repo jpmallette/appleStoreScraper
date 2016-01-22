@@ -18,6 +18,8 @@ data_storage <- data.frame(matrix(data=NA,
                                   nrow = 800,ncol=9)) 
 colnames(data_storage)<-c("name","price","topapp_url_product","apple_store_url","device",
                           "pricing_model","ranking","category","date")
+today<-Sys.Date()
+main_url_site<-"www.topappcharts.com"
 
 for(i in seq(0,175,25)) {
   x<- i/25
