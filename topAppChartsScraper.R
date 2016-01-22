@@ -1,7 +1,6 @@
     # purpose : script to automate scraping of topappchartdownload
+#--- source 
 
-source("C:\\Users\\Terry\\Desktop\\Project\\Applestore\\main.r")
-#--- initilisation 
 
 #--- Global variables
 today<-Sys.Date()

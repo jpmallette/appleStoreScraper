@@ -5,6 +5,7 @@
 
 libs <- c('reshape2', 'data.table', 'stringr','stringi',
           'sqldf','ggplot2','survival','plyr','gridExtra')
+
 lapply(libs, function(lib) { 
   suppressPackageStartupMessages( 
     library(lib, character.only = TRUE)
@@ -18,10 +19,6 @@ inc._installDeps <- function(lib) {
 }
 
 ## source other r files
-
-source("C:\\Users\\Terry\\Desktop\\Project\\Applestore\\appleStoreScraper.r")
-source("C:\\Users\\Terry\\Desktop\\Project\\Applestore\\topAppChartsFonction.r")
-
 ###################################################################################################
 ########## Functions sections
 
