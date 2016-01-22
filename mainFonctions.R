@@ -186,10 +186,11 @@ top5CategoryMonopolyData <- function(data_intensity,pricing_model,device,cat_ran
 # function parameter test
 
 
-time_censure <- function(data,censure_quit_rank,censure_days_interval,last_day_observation,day_observation) {
+time_censure <- function(data,censure_quit_rank,censure_days_interval,
+                         last_day_observation,day_observation) {
   
   #//
-  #   "The function take reshape data has data argument"
+  #   "The function take reshape dataframe argument"
   #//
   
   # global variables
