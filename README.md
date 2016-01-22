@@ -36,7 +36,7 @@ The appleStoreScraper(apple_store_url,wait_time,batch_size) function include wai
 
 STEP 4 : MERGE THE TWO FILES
 
-* apple_topapp_base <-merge(top_apps_charts_books_data,apple_data,all.x=T,by="AppID")
+* apple_top_app <-merge(top_apps_charts_books_data,apple_data,all.x=T,by="AppID")
 
 As a further note, sample analysis can be found in the file "sampleAnalysis.R". Feel free to improve the file (aka name convention and other issues that can arise)
 
