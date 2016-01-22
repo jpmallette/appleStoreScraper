@@ -11,6 +11,8 @@ source("mainFonctions.R")
 top_apps_charts_books_data <- extract_data_category("Books")
 unique_apple_url <- unique(top_apps_charts_books_data$apple_store_url)
 apple_data <- appleStoreScraper(unique_apple_url,30,100)
+saveRDS('apple_data.rds')
+readRDS('apple_data.rds')
 apple_top_app <-merge(top_apps_charts_books_data,apple_data,all.x=T,by="AppID")
 
 ############## INSIGHTS SECTION ###############################
@@ -22,8 +24,7 @@ apple_top_app <-merge(top_apps_charts_books_data,apple_data,all.x=T,by="AppID")
 
 ## Start Section : Survival analysis
 ################################################################################
-apple_topapp_base <- readRDS("apple_top_app.rds")
-saveRDS(apple_topapp_base,'apple_top_app.rds')
+apple_top_app <- readRDS("apple_top_app.rds")
 
 # computed variables days_since_last_observation
 day_observation <- as.Date("2015-09-01") 
@@ -55,13 +56,9 @@ survival_reshape$device         <- as.factor(survival_reshape$device)
 survival_reshape$pricing_model  <- as.factor(survival_reshape$pricing_model)
 survival_reshape$category       <- relevel(x = survival_reshape$category, ref = "RPG")
 
-survival_reshape$group_kids_cat <- ifelse(survival_reshape$category == "Books" ||  
-                                      survival_reshape$category == "Education" || 
-                                      survival_reshape$category == "Educational" ||
-                                      survival_reshape$category == "Family","kids_family",
-                                      "games")
-
 # calculate time and censure 
+survival_reshape  <- data.frame(survival_reshape)
+
 survival_reshape_tc_200 <- time_censure(data = survival_reshape,censure_quit_rank = 200,censure_days_interval = 3,
                                         last_day_observation = last_day_observation,day_observation = day_observation)
 
@@ -71,47 +68,47 @@ survival_reshape_tc_100 <- subset(survival_reshape_tc_100,first_ranked_day > 0)
 
 # descriptive statistics
 
-hist(survival_reshape_tc_200$censure_200)
+table(survival_reshape_tc_200$censure_200)
 summary(survival_reshape_tc_200$time_200)
 
-hist(survival_reshape_tc_100$censure_100)
+table(survival_reshape_tc_100$censure_100)
 summary(survival_reshape_tc_100$time_100)
 
 par(mfrow=c(1,2))
-hist(survival_reshape_tc_200$time_200,ylab = "Nombre d'applications", xlab = "Temps",main = "Rang 1 ? 200")
-hist(survival_reshape_tc_100$time_100,ylab = "Nombre d'applications", xlab = "Temps",main = "Rang 1 ? 100")
+hist(survival_reshape_tc_200$time_200,ylab = "Number of Mobile Applications", xlab = "Number of Days in Ranking",main = "Rank 1 to 200")
+hist(survival_reshape_tc_100$time_100,ylab = "Number of Mobile Applications", xlab = "Number of Days in Ranking",main = "Rank 1 to 100")
 
 ### Survival Analysis
 
 # Gobal survival function
 sortie <- survfit(Surv(time_200,censure_200)~1,data=survival_reshape_tc_200)
-plot_1 <- ggsurv(sortie,xlab = "Nombre de jours class?s",
-                 ylab= "Probabilit? de Survie", main = "Rang 1 ? 200") + 
+plot_1 <- ggsurv(sortie,xlab = "Number of Days in Ranking",
+                 ylab= "Survival Probability", main = "Rank 1 to 200") + 
   theme(text = element_text(size=18), 
         axis.text.x = element_text(size=18,colour="black"),
         axis.text.y = element_text(size=18,colour="black")) 
 
 sortie <- survfit(Surv(time_100,censure_100)~1,data=survival_reshape_tc_100)
-plot_2 <- ggsurv(sortie,xlab = "Nombre de jours class?s",
-                 ylab= "Probabilit? de Survie", main = "Rang 1 ? 100")  + 
+plot_2 <- ggsurv(sortie,xlab = "Number of Days in Ranking",
+                 ylab= "Survival Probability", main = "Rank 1 to 100")  + 
   theme(text = element_text(size=18), 
         axis.text.x = element_text(size=18,colour="black"),
         axis.text.y = element_text(size=18,colour="black")) 
 
 grid.arrange(plot_1, plot_2, ncol=1,nrow = 2)
 
-
 # Survival function with pricing_model as factor
+
 sortie <- survfit(Surv(time_200,censure_200)~1 + pricing_model,data=survival_reshape_tc_200)
-plot_1 <- ggsurv(sortie,xlab = "Nombre de jours class?s",
-                 ylab= "Probabilit? de Survie", main = "Rang 1 ? 200") + 
+plot_1 <- ggsurv(sortie,xlab = "Number of Days in Ranking",
+                 ylab= "Survival Probability", main = "Rank 1 to 200") + 
   theme(text = element_text(size=18), 
         axis.text.x = element_text(size=18,colour="black"),
         axis.text.y = element_text(size=18,colour="black")) 
 
 sortie <- survfit(Surv(time_100,censure_100)~1 + pricing_model,data=survival_reshape_tc_100)
-plot_2 <- ggsurv(sortie,xlab = "Nombre de jours class?s",
-                 ylab= "Probabilit? de Survie", main = "Rang 1 ? 100") + 
+plot_2 <- ggsurv(sortie,xlab = "Number of Days in Ranking",
+                 ylab= "Survival Probability", main = "Rank 1 to 100") + 
   theme(text = element_text(size=18), 
         axis.text.x = element_text(size=18,colour="black"),
         axis.text.y = element_text(size=18,colour="black")) 
@@ -120,44 +117,38 @@ grid.arrange(plot_1, plot_2, ncol=1,nrow = 2)
 
 # Survival function with device as factor
 sortie <- survfit(Surv(time_200,censure_200)~1 + device ,data=survival_reshape_tc_200)
-plot_1 <- ggsurv(sortie,xlab = "Nombre de jours class?s",
-                 ylab= "Probabilit? de Survie", main = "Rang 1 ? 200") + 
+plot_1 <- ggsurv(sortie,xlab = "Number of Days in Ranking",
+                 ylab= "Survival Probability", main = "Rank 1 to 200") + 
   theme(text = element_text(size=18), 
         axis.text.x = element_text(size=18,colour="black"),
         axis.text.y = element_text(size=18,colour="black")) 
 
 sortie <- survfit(Surv(time_100,censure_100)~1  + device ,data=survival_reshape_tc_100)
-plot_2 <- ggsurv(sortie,xlab = "Nombre de jours class?s",
-                 ylab= "Probabilit? de Survie", main = "Rang 1 ? 100") + 
+plot_2 <- ggsurv(sortie,xlab = "Number of Days in Ranking",
+                 ylab= "Survival Probability", main = "Rank 1 to 100") + 
   theme(text = element_text(size=18), 
         axis.text.x = element_text(size=18,colour="black"),
         axis.text.y = element_text(size=18,colour="black")) 
 
 grid.arrange(plot_1, plot_2, ncol=1,nrow = 2)
 
-# Survival function with category as factor
-sortie <- survfit(Surv(time_200,censure_200)~1 + category,data=survival_reshape_tc)
-summary(sortie)
-# cox model
+# Cox model
 
 modele.cox<-coxph(Surv(time_200,censure_200)~1 + pricing_model + device + category,data=survival_reshape_tc_200)
 summary(modele.cox)
-modele.cox<-coxph(Surv(time_100,censure_100)~1 + pricing_model + device + category + grou,data=survival_reshape_tc_100)
-summary(modele.cox)
-modele.cox<-coxph(Surv(time_50,censure_50)~1 + pricing_model + device + category,data=survival_reshape_tc_50)
-summary(modele.cox)
 
-
-modele.cox<-coxph(Surv(time_200,censure_200)~1 + pricing_model + device + group_,data=survival_reshape_tc_200)
-summary(modele.cox)
-modele.cox<-coxph(Surv(time_100,censure_100)~1 + pricing_model + device + group_,data=survival_reshape_tc_100)
-summary(modele.cox)
-modele.cox<-coxph(Surv(time_50,censure_50)~1 + pricing_model + device + group_,data=survival_reshape_tc_50)
+modele.cox<-coxph(Surv(time_100,censure_100)~1 + pricing_model + device + category,data=survival_reshape_tc_100)
 summary(modele.cox)
 
 ### interpretation 
-# EX : At every moment in time, the risk that a player 
-# quit the app when using an iPad is 0.80 times an iPhone
+#  exp(-0.07434) = 0.92836 # pricing_modelPaid
+#  exp(0.09272) = 1.09716 # deviceiPhone
+
+# EX : At every moment in time, the risk that a mobile application
+# quit the ranking when it's a paid apps is 7 % less than when it's free apps
+
+# EX : At every moment in time, the risk that a mobile applications
+# quit the ranking on iPhone is 9.71 % more than on iPad
 
 #### End section : Cox Survival Analysis
 ################################################################################
