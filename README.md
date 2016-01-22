@@ -1,27 +1,44 @@
 # appleStoreScraper
 
-This repository will allow developer in the mobile app space to scrape free information from the itunes.com and the http://www.topappcharts.com/ website. The combination of the two websites will allow anyone interested in mobile apps to extract information regarding the characteristic of an app and is ranking. If the scraper run for multiple days, it will allow to see the evolution of any app ranking in time.
+## Goal of the repo
 
-* A detail Report (written in French in MS Word format) can be found at this adress : 
-* Sample of Data that were collected from september to october is .... . The format of the data is in RDS and it can be found in the repository.
+This repository will allow developer, mobile app researcher and anyone interested in getting their hand on mobile app data to scrape free information from the itunes.com and the http://www.topappcharts.com/ website. The combination of the two websites allow to extract information regarding the characteristic of an app and their ranking. If the scraper run for multiple days, it will allow to have data on the evolution of any app ranking thorought time. This repository goal is also to demonstrate how to write web scraper in R from scratch. I encourage those interested in scraping in R to consult Hadley Wickham library rvest.
 
-Before extracting, I strongly recommand to source the main.File. Don't forget to change the directory ! 
-* source("mainFonctions.R")
+* A sample analysis report (written in French in MS Word format) can be found by following the url : http://bit.ly/1kGSokb.
+* The file apple_topapp_base.rds contains data that were collected from the start of September to the end of October 2015. The file is available in the repository
 
-Afterward, you can scrape any category of app found in the http://www.topappcharts.com/ website.
-Suppose you want to extract the data found in the Books category. Simply execute the following 
-line of code. This will scrape all the information of all pages in the Books category found on this 
-url http://www.topappcharts.com/chart.php?show=category&category=Books&start=0.
+## Fun part: How to extract the data
 
-* books <- extract_data_category("Books")
+STEP 1 : SOURCE FILES AND CHANGE DIRECTORY
 
-Extract url of itunes
-scrap apple store 
-merge the two file 
-You are good to go 
+Before extracting, I strongly recommand to first change the setwd in mainFonction.R with the path where you have downloaded the repo and execute the mainFonction.R files
 
-Sample of analysis that can be done are found the report and in the file "sampleAnalysis.R"
+* setwd("/Users/jpmallette/Downloads/appleStoreScraper-master 2/")
 
+STEP 2 : SCRAPE THE TOPAPPCHARTS WEBSITE with the topAppChartsScraper.R file.
 
+With this function, you can scrape any category found in the http://www.topappcharts.com/ website.
+To give an example, suppose you want to extract the data found in the Books category. Simply execute the following 
+line of code. 
 
-For the english speaker, I encourage to look at the image. 
+* top_apps_charts_books_data <- extract_data_category("Books")
+
+This will scrape all the information of all pages in the Books category found at this 
+url: http://www.topappcharts.com/chart.php?show=category&category=Books&start=0.
+
+STEP 3 : SCRAP ITUNES WEBSITE 
+
+Following with the example above, run the folowing line of code to get data from the ITunes website.
+* unique_apple_url <- unique(top_apps_charts_books_data$apple_store_url)
+* apple_data <- appleStoreScraper(unique_apple_url,30,60)
+
+The appleStoreScraper(apple_store_url,wait_time,batch_size) function include wait_time and a batch_size arguments that allow to read many url without being block by Apple. If you have massive amount of url to read (more than 10 000), I recommand looking at my appleStoreScraperFacilitator() function to improve scalability. 
+
+STEP 4 : MERGE THE TWO FILES
+
+* apple_topapp_base <-merge(top_apps_charts_books_data,apple_data,all.x=T,by="AppID")
+
+As a further note, sample analysis can be found in the file "sampleAnalysis.R". Feel free to improve the file (aka name convention and other issues that can arise)
+
+YOU ARE GOOD TO GO AND HAVE FUN ! 
+
