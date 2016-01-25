@@ -11,8 +11,6 @@ source("mainFonctions.R")
 top_apps_charts_books_data <- extract_data_category("Books")
 unique_apple_url <- unique(top_apps_charts_books_data$apple_store_url)
 apple_data <- appleStoreScraper(unique_apple_url,30,100)
-saveRDS('apple_data.rds')
-readRDS('apple_data.rds')
 apple_top_app <-merge(top_apps_charts_books_data,apple_data,all.x=T,by="AppID")
 
 ############## INSIGHTS SECTION ###############################
@@ -107,23 +105,6 @@ plot_1 <- ggsurv(sortie,xlab = "Number of Days in Ranking",
         axis.text.y = element_text(size=18,colour="black")) 
 
 sortie <- survfit(Surv(time_100,censure_100)~1 + pricing_model,data=survival_reshape_tc_100)
-plot_2 <- ggsurv(sortie,xlab = "Number of Days in Ranking",
-                 ylab= "Survival Probability", main = "Rank 1 to 100") + 
-  theme(text = element_text(size=18), 
-        axis.text.x = element_text(size=18,colour="black"),
-        axis.text.y = element_text(size=18,colour="black")) 
-
-grid.arrange(plot_1, plot_2, ncol=1,nrow = 2)
-
-# Survival function with device as factor
-sortie <- survfit(Surv(time_200,censure_200)~1 + device ,data=survival_reshape_tc_200)
-plot_1 <- ggsurv(sortie,xlab = "Number of Days in Ranking",
-                 ylab= "Survival Probability", main = "Rank 1 to 200") + 
-  theme(text = element_text(size=18), 
-        axis.text.x = element_text(size=18,colour="black"),
-        axis.text.y = element_text(size=18,colour="black")) 
-
-sortie <- survfit(Surv(time_100,censure_100)~1  + device ,data=survival_reshape_tc_100)
 plot_2 <- ggsurv(sortie,xlab = "Number of Days in Ranking",
                  ylab= "Survival Probability", main = "Rank 1 to 100") + 
   theme(text = element_text(size=18), 
