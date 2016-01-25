@@ -19,6 +19,8 @@ inc._installDeps <- function(lib) {
 }
 
 ## source other r files
+source('topAppChartsFonction.r')
+source('appleStoreScraper.r')
 ###################################################################################################
 ########## Functions sections
 
