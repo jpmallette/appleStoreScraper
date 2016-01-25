@@ -1,10 +1,4 @@
     # purpose : script to automate scraping of topappchartdownload
-#--- source 
-
-
-#--- Global variables
-today<-Sys.Date()
-main_url_site<-"www.topappcharts.com"
 
 #--- Category extraction
 # general
@@ -23,10 +17,6 @@ strategy_games<- extract_data_category("Strategy+Games")
 trivia_games<-extract_data_category("Trivia+Games")
 racing_games<-extract_data_category("Racing+Games")
 role_games<-extract_data_category("Role+Playing+Games")
-
-# top
-#top_games<-extract_data_category("Top+Games") 
-#top_apps<-extract_data_category("Top+Apps") 
 
 #--- Vertical merge
 df<-rbind(books,education,action_games,adventure_games,arcade_games,
