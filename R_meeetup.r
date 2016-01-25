@@ -13,12 +13,7 @@ unique_apple_url <- unique(top_apps_charts_books_data$apple_store_url)
 apple_data <- appleStoreScraper(unique_apple_url,30,100)
 apple_top_app <-merge(top_apps_charts_books_data,apple_data,all.x=T,by="AppID")
 
-############## INSIGHTS SECTION ###############################
-
-## In the project, more analysis where found and explored. In the R meetup, I decided 
-## to only present the survival analysis done with Cox Model.
-## Please note that the data apple_top_app variables named follow a convention. The names
-## are different from the variable name found in the scraper.
+############## INSIGHTS SECTION : EXTRA MATERIALS ON HOW TO USE THE DATA 
 
 ## Start Section : Survival analysis
 ################################################################################
