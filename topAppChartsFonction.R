@@ -42,8 +42,8 @@ for(i in seq(0,175,25)) {
                       app_name_html_line)+16,regexpr("</span>",
                        app_name_html_line)-1)
   
-  app_name_dirty_v2<- str_replace_all(app_name_dirty_v1,"â€"," ' ") # not working will need to correct encoding issue
-  app_name_clean<- str_replace_all(app_name_dirty_v2,"&amp;","&") # correct encoding issue
+  app_name_dirty_v2<- str_replace_all(app_name_dirty_v1,"â€"," ' ") 
+  app_name_clean<- str_replace_all(app_name_dirty_v2,"&amp;","&") 
   data_storage$name[start_storage:end_storage]<-app_name_clean
 
   # We can see that the first are free. 
