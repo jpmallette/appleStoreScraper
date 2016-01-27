@@ -18,12 +18,12 @@ row<-length(apple_app_url)
 ## --------- Read  product url and extract information on product
 ##           one at a time  
 
-nb_loop <- ceiling(row/batch_size)
-iterator_value <- suppressWarnings(matrix(data= seq(1:row),nrow=batch_size ,ncol = nb_loop))
+batch_loop <- ceiling(row/batch_size)
+iterator_value <- suppressWarnings(matrix(data= seq(1:row),nrow=batch_size ,ncol = batch_loop))
 
-for (x in 1:nb_loop) { 
+for (x in 1:batch_loop) { 
   
-  if (x != nb_loop) {
+  if (x != batch_loop) {
     start_store <- batch_size * (x - 1) + 1
     end_store <- batch_size * x
     print(paste0("Now executing start row : ",start_store)) # for debug
