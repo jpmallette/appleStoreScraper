@@ -30,13 +30,23 @@ STEP 3 : SCRAP ITUNES WEBSITE
 
 Following with the example above, run the folowing line of code to get data from the ITunes website.
 * unique_apple_url <- unique(top_apps_charts_books_data$apple_store_url)
-* apple_data <- appleStoreScraper(unique_apple_url,30,60)
+* apple_data <- appleStoreScraper(unique_apple_url,30,100)
 
 The appleStoreScraper(apple_store_url,wait_time,batch_size) function include wait_time and a batch_size arguments that allow to read many url without being block by Apple. If you have massive amount of url to read (more than 10 000), I recommand looking at my appleStoreScraperFacilitator() function to improve scalability. 
 
 STEP 4 : MERGE THE TWO FILES
 
-* apple_top_app <-merge(top_apps_charts_books_data,apple_data,all.x=T,by="AppID")
+extract the appID of the two data object collected do to the  merge.
+
+*top_apps_charts_books_data$appID <-substr(top_apps_charts_books_data$apple_store_url,
+                                           regexpr('/id',top_apps_charts_books_data$apple_store_url)
+                                           +3,regexpr('?mt',top_apps_charts_books_data$apple_store_url)-2)
+
+*apple_data$appID <- substr(apple_data$apple_store_url,
+                           regexpr('/id',apple_data$apple_store_url)
+                           +3,regexpr('?mt',apple_data$apple_store_url)-2)
+                           
+* apple_top_app <-merge(top_apps_charts_books_data,apple_data,by="appID")
 
 As a further note, sample analysis can be found in the file "sampleAnalysis.R". Feel free to improve the file (aka name convention and other issues that can arise)
 
