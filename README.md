@@ -38,11 +38,11 @@ STEP 4 : MERGE THE TWO FILES
 
 extract the appID of the two data object collected do to the  merge.
 
-*top_apps_charts_books_data$appID <-substr(top_apps_charts_books_data$apple_store_url,
+* top_apps_charts_books_data$appID <-substr(top_apps_charts_books_data$apple_store_url,
                                            regexpr('/id',top_apps_charts_books_data$apple_store_url)
                                            +3,regexpr('?mt',top_apps_charts_books_data$apple_store_url)-2)
 
-*apple_data$appID <- substr(apple_data$apple_store_url,
+* apple_data$appID <- substr(apple_data$apple_store_url,
                            regexpr('/id',apple_data$apple_store_url)
                            +3,regexpr('?mt',apple_data$apple_store_url)-2)
                            
