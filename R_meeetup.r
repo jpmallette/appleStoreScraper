@@ -12,7 +12,7 @@ top_apps_charts_books_data <- extract_data_category("Books")
 unique_apple_url <- unique(top_apps_charts_books_data$apple_store_url)
 
 subset_unique_apple_url <- unique_apple_url[1:25]
-apple_data <- appleStoreScraper(subset_unique_apple_url,3,100)
+apple_data <- appleStoreScraper(subset_unique_apple_url,2,100)
 
 top_apps_charts_books_data$appID <-substr(top_apps_charts_books_data$apple_store_url,
                                            regexpr('/id',top_apps_charts_books_data$apple_store_url)
