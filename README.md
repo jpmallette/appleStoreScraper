@@ -36,7 +36,7 @@ The appleStoreScraper(apple_store_url,wait_time,batch_size) function include wai
 
 STEP 4 : MERGE THE TWO FILES
 
-extract the appID of the two data object collected do to the  merge.
+extract the appID of the two data object collected and do the  merge.
 
 * top_apps_charts_books_data$appID <-substr(top_apps_charts_books_data$apple_store_url,
                                            regexpr('/id',top_apps_charts_books_data$apple_store_url)
