@@ -10,8 +10,19 @@ source("mainFonctions.R")
 
 top_apps_charts_books_data <- extract_data_category("Books")
 unique_apple_url <- unique(top_apps_charts_books_data$apple_store_url)
-apple_data <- appleStoreScraper(unique_apple_url,30,100)
-apple_top_app <-merge(top_apps_charts_books_data,apple_data,all.x=T,by="AppID")
+
+subset_unique_apple_url <- unique_apple_url[1:25]
+apple_data <- appleStoreScraper(subset_unique_apple_url,3,100)
+
+top_apps_charts_books_data$appID <-substr(top_apps_charts_books_data$apple_store_url,
+                                           regexpr('/id',top_apps_charts_books_data$apple_store_url)
+                                           +3,regexpr('?mt',top_apps_charts_books_data$apple_store_url)-2)
+
+apple_data$appID <- substr(apple_data$apple_store_url,
+                           regexpr('/id',apple_data$apple_store_url)
+                           +3,regexpr('?mt',apple_data$apple_store_url)-2)
+
+apple_top_app <-merge(top_apps_charts_books_data,apple_data,by="appID")
 
 ############## INSIGHTS SECTION : EXTRA MATERIALS ON HOW TO USE THE DATA 
 
