@@ -16,7 +16,7 @@ row<-length(apple_app_url)
 
 
 ## --------- Read  product url and extract information on product
-##           at a time  
+##           one at a time  
 
 nb_loop <- ceiling(row/batch_size)
 iterator_value <- suppressWarnings(matrix(data= seq(1:row),nrow=batch_size ,ncol = nb_loop))
