@@ -48,7 +48,7 @@ extract the appID of the two data object collected and do the  merge.
                            
 * apple_top_app <-merge(top_apps_charts_books_data,apple_data,by="appID")
 
-As a further note, sample analysis can be found in the file "sampleAnalysis.R". Feel free to improve the file (aka name convention and other issues that can arise)
+As a further note, I have added extra material in the R_meetup.r . I have done a survival analysis base on the data.
 
 YOU ARE GOOD TO GO AND HAVE FUN ! 
 
